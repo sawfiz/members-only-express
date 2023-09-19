@@ -16,10 +16,34 @@ block content
       input.form-control(type="text" name="username" required=true placeholder="nylonhusk")
     .form-group
       label(for="password") Password
-      input.form-control(type="text" name="password" required=true placeholder="********")
+      .input-group-append
+        input.form-control(type="password" name="password" id="password" required=true placeholder="********")
+        button.btn.btn-light(type='button' id='togglePassword')
+          i.far.fa-eye(id='icon' style="cursor: pointer;")
     .form-group
       label(for="password1") Confirm Password
-      input.form-control(type="text" name="password1" required=true placeholder="********")
+      .input-group-append
+        input.form-control(type="password" name="password1" id='password1' required=true placeholder="********")
+        button.btn.btn-light(type='button' id='togglePassword1')
+          i.far.fa-eye(id='icon1' style="cursor: pointer;")
     if error
       p.text-danger #{error}
     button.btn.btn-primary Sign Up
+
+  script.
+    const passwordField = document.getElementById('password');
+    const toggleButton = document.getElementById('togglePassword');
+    const icon = document.getElementById('icon')
+
+    const passwordField1 = document.getElementById('password1');
+    const toggleButton1 = document.getElementById('togglePassword1');
+    const icon1 = document.getElementById('icon1')
+
+    toggleButton.addEventListener('click',  () => {
+      passwordField.type = passwordField.type === 'password' ? 'text' : 'password'
+      icon.classList.toggle('fa-eye-slash')
+    });
+    toggleButton1.addEventListener('click',  () => {
+      passwordField1.type = passwordField1.type === 'password' ? 'text' : 'password'
+      icon1.classList.toggle('fa-eye-slash')
+    });
