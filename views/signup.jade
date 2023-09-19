@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  h4.mt-4= title
+
+  form(method="POST" action="")
+    .form-group
+      label(for="firstName") First Name
+      input.form-control(type="text" name="firstNname" required=true placeholder="Nylon")
+    .form-group
+      label(for="lastNname") Last Name
+      input.form-control(type="text" name="lastName" required=true placeholder="Husk")
+    .form-group
+      label(for="username") User Name
+      input.form-control(type="text" name="username" required=true placeholder="nylonhusk")
+    .form-group
+      label(for="password") Password
+      input.form-control(type="text" name="password" required=true placeholder="********")
+    .form-group
+      label(for="password") Confirm Password
+      input.form-control(type="text" name="password" required=true placeholder="********")
+    button.btn.btn-primary Sign Up

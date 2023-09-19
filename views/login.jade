@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+  h4.mt-4= title
+
+  form(method="POST" action="")
+    .form-group
+      label(for="username") User Name
+      input.form-control(type="text" name="username" required=true placeholder="nylonhusk")
+    .form-group
+      label(for="password") Password
+      input.form-control(type="text" name="password" required=true placeholder="********")
+    button.btn.btn-primary Login
+
+  p= message
+
+  hr
+  p No account yet?
+  button.btn.btn-success
+    a(href="/signup" style="text-decoration: none; color: white") Sign Up
