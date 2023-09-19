@@ -7,7 +7,7 @@ const index_controller = require('../controllers/indexController');
 // Index Routes
 
 // Display home page
-// router.get('/', index_controller.messages_list_get);
+router.get('/', index_controller.messages_list_get);
 
 // Display login page
 router.get('/login', index_controller.login_get);
@@ -18,8 +18,8 @@ router.get('/login', index_controller.login_get);
 // Dispaly signup page
 router.get('/signup', index_controller.signup_get);
 
-// // Handel signup page post
-// router.post('/signup', index_controller.signup_post);
+// Handel signup page post
+router.post('/signup', index_controller.signup_post);
 
 // // Dispaly logout page
 // router.get('/logout', index_controller.logout_get);

@@ -7,9 +7,9 @@ block content
   form(method="POST" action="")
     .form-group
       label(for="firstName") First Name
-      input.form-control(type="text" name="firstNname" required=true placeholder="Nylon")
+      input.form-control(type="text" name="firstName" required=true placeholder="Nylon")
     .form-group
-      label(for="lastNname") Last Name
+      label(for="lastName") Last Name
       input.form-control(type="text" name="lastName" required=true placeholder="Husk")
     .form-group
       label(for="username") User Name
@@ -18,6 +18,8 @@ block content
       label(for="password") Password
       input.form-control(type="text" name="password" required=true placeholder="********")
     .form-group
-      label(for="password") Confirm Password
-      input.form-control(type="text" name="password" required=true placeholder="********")
+      label(for="password1") Confirm Password
+      input.form-control(type="text" name="password1" required=true placeholder="********")
+    if error
+      p.text-danger #{error}
     button.btn.btn-primary Sign Up

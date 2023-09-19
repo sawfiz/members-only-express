@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-  firstName: { type: String, required: true, maxLength: 100 },
-  lastName: { type: String, required: true, maxLength: 100 },
+  first_name: { type: String, required: true, maxLength: 100 },
+  last_name: { type: String, required: true, maxLength: 100 },
   username: { type: String, required: true, maxLength: 100 },
   password: { type: String, required: true, maxLength: 100 },
   role: {
