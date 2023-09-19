@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -8,6 +10,25 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
+// Set up mongoose connection
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+
+async function connectToDatabase() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('Database connected');
+  } catch (error) {
+    console.error('Database connection error:', error);
+  }
+}
+
+// Connect to the database when the app starts
+connectToDatabase();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
