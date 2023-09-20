@@ -28,14 +28,28 @@ exports.login_get = (req, res, next) => {
 };
 
 // Handle login on POST
-exports.login_post = (req, res, next) => {
-  console.log(req.body);
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true,
-  })(req, res, next);
-};
+exports.login_post = [
+  // Validate and sanizize fields
+  body('username', 'Username must not be empty')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(req.body);
+    if (errors.isEmpty()) {
+      passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true,
+      })(req, res, next);
+    } else {
+      console.log('🚀 ~ file: indexController.js:40 ~ errors:', errors);
+      res.render('login', { title: 'Log In', errors: errors.array() });
+    }
+  },
+];
 
 // Display signup on GET
 exports.signup_get = (req, res, next) => {
@@ -60,7 +74,6 @@ exports.signup_post = [
 
   async (req, res, next) => {
     const errors = validationResult(req);
-    // ToDo check if username is already taken
     const usernameTaken = await User.findOne({
       username: req.body.username,
     }).exec();

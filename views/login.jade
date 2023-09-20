@@ -8,12 +8,19 @@ block content
     .form-group
       label(for="username") User Name
       input.form-control(type="text" name="username" required=true placeholder="nylonhusk")
+
+    if errors
+      ul.text-danger
+        for error in errors
+          li!= error.msg
+
     .form-group
       label(for="password") Password
       input.form-control(type="password" name="password" required=true placeholder="********")
-    button.btn.btn-primary Login
 
-  p= message
+    p.text-danger #{message}
+
+    button.btn.btn-primary Login
 
   hr
   p No account yet?
