@@ -14,7 +14,7 @@ const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const postRouter = require('./routes/post');
 
 const User = require('./models/user');
 
@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/post', postRouter);
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {

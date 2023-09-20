@@ -3,11 +3,12 @@ const router = express.Router();
 
 // Require the controller module
 const index_controller = require('../controllers/indexController');
+const post_controller = require('../controllers/postController');
 
 // Index Routes
 
 // Display home page
-router.get('/', index_controller.messages_list_get);
+router.get('/', post_controller.post_list_get);
 
 // Display login page
 router.get('/login', index_controller.login_get);

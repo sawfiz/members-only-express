@@ -17,9 +17,9 @@ schema.virtual("date_yyyy_mm_dd").get(function () {
 
 // Virtual propety news_url
 schema.virtual("url").get(function () {
-  return `/message/${this._id}`;
+  return `/post/${this._id}`;
 });
 
-const Message = mongoose.model('Message', schema)
+const Post = mongoose.model('Post', schema)
 
-module.exports = Message;
+module.exports = Post;

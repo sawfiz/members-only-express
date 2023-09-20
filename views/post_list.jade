@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  .container.mt-4.px-0
+    if user
+      p Welcome back, #{user.username}
+
+    each post in post_list
+      //- - const cardClasses = post.publish ? 'card text-white bg-secondary mb-3' : 'card border-danger mb-3'
+      //- div(class="#{cardClasses}")
+      card.bg-dark.m-1
+        .card-body
+        .card-title #{post.title}
+        .card-subtitle.text-muted #{post.date_yyyy_mm_dd}
+        .card-text #{post.text}
+
+
+  //- Only show the button if rendering for News
+  if admin
+    button.btn.btn-primary
+      a(href='/post/create', style='text-decoration: none; color: inherit;') Add News
