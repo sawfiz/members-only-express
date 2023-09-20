@@ -27,10 +27,10 @@ router.post('/create', post_controller.create_post_post)
 // // POST request to update post.
 // router.post("/:id/update", validateObjectId, post_controller.update_post_post);
 
-// // GET request to delete post.
-// router.get("/:id/delete", validateObjectId, post_controller.delete_post_get);
+// GET request to delete post.
+router.get("/:id/delete", validateObjectId, post_controller.delete_post_get);
 
-// // POST request to delete post.
-// router.post("/:id/delete", validateObjectId, post_controller.delete_post_post);
+// POST request to delete post.
+router.post("/:id/delete", validateObjectId, post_controller.delete_post_post);
 
 module.exports = router;

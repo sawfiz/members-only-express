@@ -14,6 +14,10 @@ block content
           if user && user.role !== 'visitor'
             .card-text #{post.author.first_name} #{post.author.last_name}
           .card-text.font-italic.font-weight-light #{post.date_yyyy_mm_dd}
+        if user && user.role === 'admin'
+          .card.footer
+            button.btn.btn-danger
+              a(href=post.url+'/delete', style='text-decoration: none; color: inherit;') Delete
 
 
   //- Only show the button if rendering for News

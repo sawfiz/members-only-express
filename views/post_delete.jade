@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h4.mt-4= title
+
+  .card.bg-light.m-2
+    .card-header #{post.title}
+    .card-body
+      .card-text.mb-2 #{post.text}
+      if user && user.role !== 'visitor'
+        .card-text #{post.author.first_name} #{post.author.last_name}
+      .card-text.font-italic.font-weight-light #{post.date_yyyy_mm_dd}
+
+  p Do you really want to delete this news?
+
+  form(method='POST' action='')
+    button.btn.btn-danger(type='submit') Delete
+    a.btn.btn-secondary(href='/') Cancel

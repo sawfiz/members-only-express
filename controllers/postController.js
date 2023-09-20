@@ -127,26 +127,26 @@ exports.create_post_post = [
 //   }),
 // ];
 
-// // Display post delete form on GET
-// exports.delete_post_get = asyncHandler(async (req, res, next) => {
-//   const post = await News.findById(req.params.id).exec();
+// Display post delete form on GET
+exports.delete_post_get = asyncHandler(async (req, res, next) => {
+  const post = await Post.findById(req.params.id).populate('author').exec();
+  if (post === null) {
+    res.redirect('/post');
+  }
 
-//   if (post === null) {
-//     res.redirect('/post');
-//   }
+  res.render('post_delete', {
+    title: 'Delete post',
+    post,
+    user: res.locals.currentUser,
+  });
+});
 
-//   res.render('post_delete', {
-//     title: 'Delete News',
-//     post,
-//   });
-// });
+// Handle post delete form on POST
+exports.delete_post_post = asyncHandler(async (req, res, next) => {
+  const post = await Post.findById(req.params.id).exec()
 
-// // Handle post delete form on POST
-// exports.delete_post_post = asyncHandler(async (req, res, next) => {
-//   const post = await News.findById(req.params.id).exec()
-
-//   if (post) {
-//     await News.findByIdAndRemove(req.params.id)
-//     res.redirect('/post')
-//   }
-// });
+  if (post) {
+    await Post.findByIdAndRemove(req.params.id)
+    res.redirect('/')
+  }
+});
