@@ -47,15 +47,20 @@ exports.signup_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body('username', 'Username must not be empty')
+    body('username', 'Username must not be empty')
     .trim()
     .isLength({ min: 1 })
     .escape(),
 
-  async (req, res, next) => {
-    const errors = validationResult(req);
+    async (req, res, next) => {
+      const errors = validationResult(req);
+      // ToDo check if username is already taken
+      const foundUserName = await User.find({username: req.body.username}).exec();
+      const userNameTaken = foundUserName.length > 0;
+      const passwordMismatch = req.body.password !== req.body.password1
 
-    if (!errors.isEmpty() || req.body.password !== req.body.password1) {
+    // If validation and sanitation errors, rerender the signup page
+    if (!errors.isEmpty() || userNameTaken || passwordMismatch ) {
       const user = new User({
         first_name: req.body.firstName,
         last_name: req.body.lastName,
@@ -63,15 +68,11 @@ exports.signup_post = [
         password: req.body.password,
       });
 
-      const error =
-        req.body.password === req.body.password1
-          ? ''
-          : 'Passwords do not match.';
-
       res.render('signup', {
         title: 'Signup',
         user,
-        error,
+        userNameTaken,
+        passwordMismatch,
         errors: errors.array(),
       });
     } else {
