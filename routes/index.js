@@ -8,7 +8,7 @@ const post_controller = require('../controllers/postController');
 // Index Routes
 
 // Display home page
-router.get('/', post_controller.post_list_get);
+router.get('/', index_controller.index_get);
 
 // Display login page
 router.get('/login', index_controller.login_get);

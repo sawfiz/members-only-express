@@ -7,7 +7,7 @@ const schema = new Schema({
   date: {type: Date},
   title: {type: String, required: true, maxLength: 100},
   text: {type: String, required: true, maxLength: 2000},
-  author: {type: Schema.Types.ObjectId, Ref:"User", rquired: true}
+  author: {type: Schema.Types.ObjectId, ref:"User", required: true}
 })
 
 // Virtual propety date_yyyy_mm_dd

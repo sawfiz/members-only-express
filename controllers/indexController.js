@@ -12,14 +12,11 @@ const capitalizeFirstLetter = (text) => {
   return text[0].toUpperCase() + text.slice(1);
 };
 
-// Display all published news items
-exports.messages_list_get = asyncHandler(async (req, res, next) => {
-  // Dispaly all news, both published and unpublished
-  // const allMessages = await this.messages_list_get.find({ publish: true }).sort({ date: -1 }).exec();
-  // res.render('news_list', { news_list: allNews, admin: false });
-  console.log(req.user);
-  res.render('index', { title: 'Welcome to the home page!', user: req.user });
-});
+// Display home page
+exports.index_get = async (req, res, next) => {
+  const allPosts = await Post.find().populate('author').sort({ date: -1 }).exec();
+  res.render('index', {user: req.user, post_list: allPosts});
+};
 
 // Display login on GET
 exports.login_get = (req, res, next) => {

@@ -59,8 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Configure flash messages
 app.use(flash());
 
-app.use('/', indexRouter);
-app.use('/post', postRouter);
+
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -94,6 +93,14 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   };
 });
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+app.use('/', indexRouter);
+app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

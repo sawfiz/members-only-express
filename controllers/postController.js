@@ -8,7 +8,6 @@ const Post = require('../models/post');
 exports.post_list_get = asyncHandler(async (req, res, next) => {
   // Dispaly all post, both published and unpublished
   const allPosts = await Post.find().sort({ date: -1 }).exec();
-  console.log("🚀 ~ file: postController.js:11 ~ exports.post_list_get=asyncHandler ~ allPosts:", allPosts)
   res.render('post_list', { post_list: allPosts, user: req.user, admin: true });
 });
 
@@ -34,13 +33,16 @@ exports.create_post_post = [
 
   asyncHandler(async (req, res, next) => {
     console.log(req.body);
+    console.log(res.locals.currentUser);
     const errors = validationResult(req);
 
     const post = new Post({
       date: req.body.date,
       title: req.body.title,
       text: req.body.text,
+      author: res.locals.currentUser,
     });
+    console.log("🚀 ~ file: postController.js:45 ~ asyncHandler ~ post:", post)
 
     if (!errors.isEmpty()) {
       res.render('post_form', {
