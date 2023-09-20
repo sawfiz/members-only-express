@@ -7,17 +7,37 @@ block content
   form(method="POST" action="")
     .form-group
       label(for="firstName") First Name
-      input.form-control(type="text" name="firstName" required=true placeholder="Nylon")
+      input.form-control(type="text"
+        name="firstName"
+        required=true
+        placeholder="Nylon"
+        value=(user ? user.first_name : '')
+        )
     .form-group
       label(for="lastName") Last Name
-      input.form-control(type="text" name="lastName" required=true placeholder="Husk")
+      input.form-control(type="text"
+        name="lastName"
+        required=true
+        placeholder="Husk"
+        value=(user ? user.last_name : '')
+        )
     .form-group
       label(for="username") User Name
-      input.form-control(type="text" name="username" required=true placeholder="nylonhusk")
+      input.form-control(type="text"
+        name="username"
+        required=true
+        placeholder="nylonhusk"
+        value=(user ? user.username : '')
+        )
     .form-group
       label(for="password") Password
       .input-group-append
-        input.form-control(type="password" name="password" id="password" required=true placeholder="********")
+        input.form-control(type="password"
+        name="password" id="password"
+        required=true
+        placeholder="********"
+        value=(user ? user.password : '')
+        )
         button.btn.btn-light(type='button' id='togglePassword')
           i.far.fa-eye(id='icon' style="cursor: pointer;")
     .form-group
@@ -29,6 +49,11 @@ block content
     if error
       p.text-danger #{error}
     button.btn.btn-primary Sign Up
+
+    if errors
+      ul
+        for error in errors
+          li!= error.msg
 
   script.
     const passwordField = document.getElementById('password');
